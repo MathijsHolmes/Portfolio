@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Tech Booth — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0d;
+    --paper: #f5f2eb;
+    --muted: #8a8778;
+    --accent: #1a4a3a;
+    --accent2: #c94f2a;
+    --rule: #d6d2c7;
+    --card: #eeeae0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 80px 60px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .tag {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+    display: block;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(42px, 7vw, 72px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    margin-top: 24px;
+    max-width: 560px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+
+  .meta-row {
+    margin-top: 40px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.45s;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-value {
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 60px 100px;
+  }
+
+  section {
+    padding-top: 64px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.5s;
+  }
+
+  section:nth-child(2) { animation-delay: 0.55s; }
+  section:nth-child(3) { animation-delay: 0.65s; }
+  section:nth-child(4) { animation-delay: 0.75s; }
+  section:nth-child(5) { animation-delay: 0.85s; }
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    max-width: 60px;
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  p {
+    color: #3a3832;
+    font-size: 13px;
+    line-height: 1.85;
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* ── CONTRIBUTION GRID ── */
+  .contrib-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 32px;
+  }
+
+  .contrib-card {
+    background: var(--card);
+    padding: 28px;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .contrib-card:hover { background: #e5e1d6; }
+
+  .contrib-card.accent-left {
+    border-left: 3px solid var(--accent);
+  }
+
+  .contrib-card.accent-right {
+    border-left: 3px solid var(--accent2);
+  }
+
+  .contrib-title {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .contrib-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .contrib-list li {
+    font-size: 12px;
+    color: var(--muted);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .contrib-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--rule);
+  }
+
+  /* ── TECH STACK ── */
+  .stack-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+  }
+
+  .stack-pill {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 6px 14px;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .stack-pill:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .stack-pill.em {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: #fff;
+  }
+
+  /* ── DATAFLOW BLOCK ── */
+  .flow-block {
+    background: var(--card);
+    border-left: 3px solid var(--accent);
+    padding: 28px 32px;
+    margin-top: 32px;
+    font-size: 12px;
+    line-height: 2;
+    color: #3a3832;
+  }
+
+  .flow-block .flow-step {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .flow-block .flow-step:last-child { border-bottom: none; }
+
+  .flow-num {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--muted);
+    min-width: 28px;
+  }
+
+  .flow-text strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .flow-text .code {
+    background: #e0dbd0;
+    padding: 1px 6px;
+    font-size: 11px;
+    border-radius: 2px;
+    color: var(--accent);
+  }
+
+  /* ── LEERUITKOMSTEN ── */
+  .lo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 28px;
+  }
+
+  .lo-item {
+    background: var(--card);
+    padding: 24px;
+    border-top: 2px solid var(--rule);
+    transition: border-color 0.2s;
+  }
+
+  .lo-item:hover { border-top-color: var(--accent); }
+
+  .lo-name {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+
+  .lo-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── CLAIM BLOCK ── */
+  .claim {
+    background: var(--accent);
+    color: #e8f0ec;
+    padding: 40px;
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+  }
+
+  .claim-item {
+    padding: 20px;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .claim-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: #a8d4be;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .claim-label {
+    font-size: 11px;
+    color: rgba(232,240,236,0.65);
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header, main { padding-left: 24px; padding-right: 24px; }
+    h1 { font-size: 38px; }
+    .contrib-grid, .lo-grid { grid-template-columns: 1fr; }
+    .claim { grid-template-columns: 1fr; }
+    .meta-row { gap: 24px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="tag">Portfolio Mathijs Holmes — HvA HBO-ICT · AI Engineer · 2025–2026 S2</span>
+  <h1>Dark Tech<br><em>Flush the AI</em></h1>
+  <p class="subtitle">
+    Een interactieve fotobooth die bezoekers confronteert met hun waterverspilling.
+    AI transformeert je selfie. Embedded hardware laat het water daadwerkelijk stromen.
+  </p>
+  <div class="meta-row">
+    <div class="meta-item">
+      <span class="meta-label">Rol</span>
+      <span class="meta-value">AI Engineer + Systeemarchitect</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Team</span>
+      <span class="meta-value">GenAI Exposed</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Periode</span>
+      <span class="meta-value">Semester 2 · 2025–2026</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Tech</span>
+      <span class="meta-value">Python · C++ · ESP32-S3</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- OVER HET PROJECT -->
+  <section>
+    <div class="section-label">01 · Over het project</div>
+    <h2>Bewustwording door beleving</h2>
+    <p>
+      Flush the AI is een installatie die bezoekers op een fysieke manier confronteert met hun waterverbruik.
+      Een bezoeker maakt een selfie; AI transformeert die naar een grappige versie van zichzelf.
+      Op het moment dat de afbeelding verschijnt, spuit een waterpomp fysiek water — de hoeveelheid gebaseerd op real-time verbruiksdata.
+    </p>
+    <p>
+      De boodschap zit niet in het verbruik per generatie, maar in het aandeel dat mensen hebben in het totale verbruik van AI. Door de waterpomp te activeren op basis van het daadwerkelijke verbruik, wordt de impact tastbaar en persoonlijk.
+    </p>
+
+    <div class="claim">
+      <div class="claim-item">
+        <div class="claim-num">150 ML</div>
+        <div class="claim-label">water per AI-generatie als beidrage van totaal</div>
+      </div>
+      <div class="claim-item">
+        <div class="claim-num">1.450×</div>
+        <div class="claim-label">verschil in waterverbruik tussen beeld en text</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MIJN BIJDRAGE -->
+  <section>
+    <div class="section-label">02 · Mijn individuele bijdrage</div>
+    <h2>Architectuur, embedded &amp; AI-advies</h2>
+    <p>
+      Binnen het team heb ik twee rollen vervuld: systeemarchitect en embedded engineer.
+      Ik heb de volledige dataflow ontworpen — van selfie tot pompactivatie —
+      en de ESP32-S3 firmware van nul opgebouwd in C++ met ESP-IDF.
+      Aanvullend heb ik het team geadviseerd over de AI-modelkeuze en de onderbouwing van de waterclaim.
+    </p>
+
+    <div class="contrib-grid">
+      <div class="contrib-card accent-left">
+        <div class="contrib-title">Systeemarchitectuur &amp; AI-advies</div>
+        <ul class="contrib-list">
+          <li>Volledige dataflow ontworpen (selfie → SD pipeline → pomp)</li>
+          <li>Modeladvies: SD v1.5 lokaal vs. cloud-API's vergeleken op kosten, snelheid, privacy en waterclaim</li>
+          <li>Onderbouwing waterclaim: Waterverbruik per AI-generatie vs wat verbruikt generatieve AI per dag en welk aandeel hebben mensen daar aan wanneer ze AI gebruiken</li>
+          <li>Dataflow-diagram gemaakt aansluitend op bredere systeemarchitectuur</li>
+          <li>Flask REST API-structuur ontworpen voor AI-component</li>
+        </ul>
+      </div>
+      <div class="contrib-card accent-right">
+        <div class="contrib-title">Embedded firmware (ESP32-S3)</div>
+        <ul class="contrib-list">
+          <li>Volledige firmware in C++ met ESP-IDF / FreeRTOS</li>
+          <li>UART-communicatie via USB Serial JTAG (reader task + FreeRTOS queue)</li>
+          <li>Command dispatcher: ON / OFF / PING protocol</li>
+          <li>PompController: GPIO 16, tijdsbegrensd via vTaskDelay</li>
+          <li>Auto-reconnect logica aan Python-kant (pump.py)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNISCHE DATAFLOW -->
+  <section>
+    <div class="section-label">03 · Technische dataflow</div>
+    <h2>Van selfie tot waterpomp</h2>
+    <p>
+      De architectuur splitst zich in twee lanes die via seriële communicatie gekoppeld zijn.
+      De AI-pipeline draait op de PC; de embedded firmware draait op de ESP32-S3 die de waterpomp aanstuurt.
+    </p>
+
+    <div class="flow-block">
+      <div class="flow-step">
+        <span class="flow-num">1</span>
+        <span class="flow-text">
+          <strong>Frontend</strong> stuurt selfie als <span class="code">multipart/form-data</span>
+          naar Flask API op <span class="code">POST /api/generate-photo</span>
+        </span>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">2</span>
+        <span class="flow-text">
+          <strong>validator.py</strong> checkt helderheid, resolutie en gezichtsdetectie (Haar cascade)
+          — bij fout: <span class="code">400</span> terug
+        </span>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">3</span>
+        <span class="flow-text">
+          <strong>SD img2img pipeline</strong> (stable-diffusion-v1-5, strength=0.5, 20 stappen, CUDA)
+          transformeert de selfie via prompt uit <span class="code">transformations.py</span>
+        </span>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">4</span>
+        <span class="flow-text">
+          Output opgeslagen als <span class="code">result.png</span>, geëncodeerd als base64,
+          teruggestuurd in JSON-response aan frontend
+        </span>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">5</span>
+        <span class="flow-text">
+          <strong>pump.py</strong> stuurt <span class="code">b"ON\n"</span> via
+          <span class="code">serial.Serial("COM6", 115200)</span> naar ESP32
+        </span>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">6</span>
+        <span class="flow-text">
+          <strong>uart.cpp</strong> leest bytes via <span class="code">usb_serial_jtag_read_bytes</span>,
+          buffert naar FreeRTOS queue
+        </span>
+      </div>
+      <div class="flow-step">
+        <span class="flow-num">7</span>
+        <span class="flow-text">
+          <strong>command.cpp</strong> herkent <span class="code">"ON"</span> →
+          <span class="code">pomp_.onForMs(5000)</span> — GPIO 16 HIGH voor 5 seconden
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section>
+    <div class="section-label">04 · Tech stack</div>
+    <h2>Gebruikte technologieën</h2>
+    <p>Het project combineert een Python AI-backend met C++ embedded firmware op ESP32-S3.</p>
+
+    <div class="stack-row">
+      <span class="stack-pill em">Python 3.13</span>
+      <span class="stack-pill em">Flask</span>
+      <span class="stack-pill em">Diffusers (HuggingFace)</span>
+      <span class="stack-pill em">Stable Diffusion v1.5</span>
+      <span class="stack-pill">PyTorch (CUDA)</span>
+      <span class="stack-pill">OpenCV</span>
+      <span class="stack-pill">PySerial</span>
+      <span class="stack-pill em">C++ (ESP-IDF)</span>
+      <span class="stack-pill em">ESP32-S3</span>
+      <span class="stack-pill em">FreeRTOS</span>
+      <span class="stack-pill">USB Serial JTAG</span>
+      <span class="stack-pill">GPIO / CMake</span>
+    </div>
+  </section>
+
+  <!-- LEERUITKOMSTEN -->
+  <section>
+    <div class="section-label">05 · Leeruitkomsten</div>
+    <h2>Wat dit project mij heeft geleerd</h2>
+
+    <div class="lo-grid">
+      <div class="lo-item">
+        <div class="lo-name">Adviseren</div>
+        <div class="lo-desc">
+          Modelkeuze onderbouwd op kosten, snelheid, privacy en geloofwaardigheid van de waterclaim.
+          Lokaal vs. cloud vergeleken met concrete berekeningen.
+        </div>
+      </div>
+      <div class="lo-item">
+        <div class="lo-name">Ontwerpen</div>
+        <div class="lo-desc">
+          Volledige systeemarchitectuur en AI-component dataflow ontworpen.
+          Twee losse systemen (Python + C++) verbonden via een helder protocol.
+        </div>
+      </div>
+      <div class="lo-item">
+        <div class="lo-name">Realiseren</div>
+        <div class="lo-desc">
+          ESP32-S3 firmware gebouwd van nul: UART, FreeRTOS tasks, GPIO-aanturing,
+          command dispatcher en auto-reconnect logica.
+        </div>
+      </div>
+      <div class="lo-item">
+        <div class="lo-name">Aan bredere systemen werken</div>
+        <div class="lo-desc">
+          Als AI engineer de volledige embedded kant gedaan. Geleerd hoe hardware-software
+          integratie werkt en hoe je grenzen trekt tussen subsystemen.
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Dark Tech Booth · HvA Studio · 2026</span>
+  <span>AI Engineer profiel · Semester 2</span>
+</footer>
+
+</body>
+</html>
